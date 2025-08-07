@@ -1,0 +1,8 @@
+<!-- RCB Logo SVG -->
+<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="50" cy="50" r="45" fill="#EC1E24" stroke="#FFD700" stroke-width="2"/>
+  <text x="50" y="35" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#FFD700">RCB</text>
+  <text x="50" y="50" text-anchor="middle" font-family="Arial, sans-serif" font-size="7" fill="#FFD700">Royal</text>
+  <text x="50" y="62" text-anchor="middle" font-family="Arial, sans-serif" font-size="7" fill="#FFD700">Challengers</text>
+  <text x="50" y="74" text-anchor="middle" font-family="Arial, sans-serif" font-size="7" fill="#FFD700">Bangalore</text>
+</svg>

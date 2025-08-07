@@ -1,0 +1,7 @@
+<!-- DC Logo SVG -->
+<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="50" cy="50" r="45" fill="#282968" stroke="#FFD700" stroke-width="2"/>
+  <text x="50" y="38" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#FFD700">DC</text>
+  <text x="50" y="55" text-anchor="middle" font-family="Arial, sans-serif" font-size="7" fill="#FFD700">Delhi</text>
+  <text x="50" y="68" text-anchor="middle" font-family="Arial, sans-serif" font-size="7" fill="#FFD700">Capitals</text>
+</svg>
