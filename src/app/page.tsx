@@ -223,7 +223,7 @@ export default function Home() {
           <div className="flex flex-col sm:flex-row gap-3">
             <button 
               onClick={() => window.location.reload()} 
-              className="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors flex items-center justify-center gap-2"
+              className="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors flex items-center justify-center gap-2 cursor-pointer"
             >
               <span>🔄</span> Try Again
             </button>
@@ -232,7 +232,7 @@ export default function Home() {
                 loadDemoData();
                 setTab("live");
               }} 
-              className="flex-1 bg-gray-600 hover:bg-gray-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors"
+              className="flex-1 bg-gray-600 hover:bg-gray-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors cursor-pointer"
             >
               Continue with Demo Data
             </button>
@@ -279,7 +279,7 @@ export default function Home() {
           </div>
           <button 
             onClick={() => setShowToast(false)}
-            className="ml-2 text-white/70 hover:text-white transition-colors"
+            className="ml-2 text-white/70 hover:text-white transition-colors cursor-pointer"
           >
             ✕
           </button>
@@ -298,7 +298,7 @@ export default function Home() {
           </div>
           <button 
             onClick={() => setEventToast(null)}
-            className="ml-2 text-gray-700 hover:text-gray-900 transition-colors"
+            className="ml-2 text-gray-700 hover:text-gray-900 transition-colors cursor-pointer"
           >
             ✕
           </button>
@@ -347,7 +347,7 @@ export default function Home() {
           
           <button
             onClick={handleGetStarted}
-            className="group inline-flex items-center gap-2 px-6 py-2 bg-white/95 hover:bg-white text-blue-700 font-semibold rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 text-sm hover:scale-105"
+            className="group inline-flex items-center gap-2 px-6 py-2 bg-white/95 hover:bg-white text-blue-700 font-semibold rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 text-sm hover:scale-105 cursor-pointer"
           >
             <span>🚀</span>
             <span>Explore Dashboard</span>
@@ -363,7 +363,7 @@ export default function Home() {
             {TABS.map((t) => (
               <button
                 key={t.key}
-                className={`relative flex-1 py-3 px-2 text-sm sm:text-base font-medium rounded-xl transition-all duration-200 ${
+                className={`relative flex-1 py-3 px-2 text-sm sm:text-base font-medium rounded-xl transition-all duration-200 cursor-pointer ${
                   tab === t.key 
                     ? "bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-lg transform scale-105" 
                     : "text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20"

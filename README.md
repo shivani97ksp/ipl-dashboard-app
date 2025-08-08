@@ -1,132 +1,334 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🏏 IPL T20 Live Dashboard
 
-## Getting Started
+A responsive, real-time IPL T20 cricket dashboard that displays live match information, points table, and match schedules sourced directly from the official IPL website (iplt20.com). Built with Next.js, TypeScript, and Tailwind CSS with mobile-first design principles.
 
-First, run the development server:
+![IPL Dashboard Preview](https://img.shields.io/badge/Status-Live-brightgreen) ![Next.js](https://img.shields.io/badge/Next.js-15.4.5-black) ![TypeScript](https://img.shields.io/badge/TypeScript-5.x-blue) ![Tailwind CSS](https://img.shields.io/badge/Tailwind-4.x-38B2AC)
 
+## 🎯 Project Overview
+
+This dashboard application fulfills the requirements of building a comprehensive IPL T20 information system with:
+
+- **Real-time Data Scraping**: Live data extraction from iplt20.com using Puppeteer
+- **Mobile-first Design**: Responsive UI optimized for all devices
+- **Live Match Display**: Current match status with scores and timings
+- **Points Table**: Interactive standings with team performance metrics
+- **Match Schedule**: Complete fixture list with venues and timings
+- **Performance Optimization**: Smart caching and fallback mechanisms
+
+## ✨ Key Features
+
+### Core Functionality
+- 🔴 **Live/Upcoming Matches**: Real-time match status with countdown timers
+- 📊 **Interactive Points Table**: Sortable standings with NRR, recent form, and qualification status
+- 📅 **Match Schedule**: Complete fixture calendar with team matchups
+- 📈 **Data Visualization**: Charts and statistics for team performance
+- 🔄 **Auto-refresh**: Updates every 60 seconds for fresh data
+
+### Technical Features
+- ⚡ **Real-time Scraping**: Puppeteer-based data extraction
+- 💾 **Smart Caching**: 60-second cache with error tracking
+- 🛡️ **Fallback System**: Comprehensive dummy data when scraping fails
+- 📱 **Responsive Design**: Mobile-first approach with Tailwind CSS
+- 🌙 **Dark Mode**: Full dark/light theme support
+- ⚙️ **Error Handling**: Robust timeout and retry mechanisms
+
+## 🚀 Quick Start
+
+### Prerequisites
+- Node.js 18+ 
+- npm, yarn, pnpm, or bun
+
+### Installation & Setup
+
+1. **Clone the repository**
+```bash
+git clone https://github.com/shivani97ksp/ipl-dashboard-app.git
+cd ipl-dashboard-app
+```
+
+2. **Install dependencies**
+```bash
+npm install
+# or
+yarn install
+# or
+pnpm install
+```
+
+3. **Run the development server**
 ```bash
 npm run dev
 # or
 yarn dev
 # or
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+4. **Open the application**
+Navigate to [http://localhost:3000](http://localhost:3000) in your browser
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+The application will automatically start scraping data from iplt20.com and display the dashboard.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+> **⚠️ Important Note**: Sometimes scraping may not work due to website restrictions or network issues. If you encounter loading issues:
+> - **Try opening the application in incognito/private browsing mode**
+> - **Use the "Load Demo Data" button** to continue with realistic dummy data
+> - The app will automatically fallback to demo data if scraping fails
 
-## Learn More
+## 🛠️ Tech Stack
 
-To learn more about Next.js, take a look at the following resources:
+- **Frontend**: Next.js 15.4.5, React 19.1.0, TypeScript 5.x
+- **Styling**: Tailwind CSS 4.x
+- **Web Scraping**: Puppeteer 24.16.0
+- **Data Visualization**: Chart.js 4.5.0 with React-ChartJS-2
+- **Deployment**: Vercel (optimized serverless functions)
+- **Caching**: In-memory caching with error tracking
+## 📋 Application Structure
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+src/
+├── app/
+│   ├── api/scrape/route.ts     # Main scraping API endpoint
+│   ├── layout.tsx              # App layout with metadata
+│   ├── page.tsx                # Main dashboard page
+│   └── globals.css             # Global styles
+├── components/
+│   ├── EnhancedLiveMatch.tsx   # Live match display component
+│   ├── EnhancedPointsTable.tsx # Interactive points table
+│   ├── Schedule.tsx            # Match schedule component
+│   ├── StatsChart.tsx          # Data visualization
+│   ├── SkeletonLoaders.tsx     # Loading state components
+│   └── QuickActionsPanel.tsx   # Action buttons and controls
+└── public/
+    └── ipl-logos/              # Team logo assets
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🔧 Data Scraping Implementation
 
-## Deploy on Vercel
+### Scraping Methodology
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+The application uses **Puppeteer** for headless browser automation to extract real-time data from the official IPL website (iplt20.com). The scraping system is designed with reliability and performance in mind.
 
-### Step-by-Step Deployment Guide
+#### Successfully Scraped Data ✅
+- **Points Table**: Live team standings from `https://www.iplt20.com/points-table/`
+  - Team names, matches played/won/lost, net run rate, points
+  - Recent form indicators (W/L sequence)
+  - Position changes (up/down/same)
+  - For/Against runs data
+  
+- **Match Results**: Recent match data from `https://www.iplt20.com/matches/results`
+  - Team codes and full scores with overs
+  - Match results and winners
+  - Venue information
+  - Match classification (Final, Qualifier, Eliminator, etc.)
+  - Up to 20 most recent matches
 
-#### 1. Prerequisites
+#### Dummy Data Fallback ⚠️
+When scraping fails or for unavailable data, the system uses realistic dummy data:
+- **Live Matches & Schedule**: Sample data with authentic team matchups
+- **Upcoming Matches**: Placeholder fixtures with proper IPL team codes
+- **Match Scenarios**: Realistic scores and playoff structure representation
+
+### Technical Implementation Details
+
+#### Scraping Configuration
+```javascript
+// Browser launch options optimized for serverless environments
+{
+  headless: true,
+  args: [
+    '--no-sandbox',
+    '--disable-setuid-sandbox',
+    '--disable-dev-shm-usage',
+    '--disable-accelerated-2d-canvas',
+    '--no-first-run',
+    '--no-zygote',
+    '--single-process',
+    '--disable-gpu'
+  ]
+}
+```
+
+#### Data Extraction Process
+1. **Points Table Scraping**:
+   - Target selectors: `.ih-td-tab`, `#pointsdata tr`
+   - Extract team standings with NRR calculations
+   - Parse recent form from `.rf` elements
+   - Handle position change indicators
+
+2. **Match Results Scraping**:
+   - Target selectors: `#team_archive li`
+   - Extract match details including scores and overs
+   - Parse venue and date/time information
+   - Classify match types (playoffs, league matches)
+
+#### Error Handling & Resilience
+- **Timeout Management**: 30-second maximum per scraping operation
+- **Graceful Degradation**: Automatic fallback to dummy data
+- **Error Tracking**: Comprehensive error counting and recovery
+- **Cache Strategy**: Smart caching with error state management
+
+### Challenges Faced & Solutions
+
+#### 1. **Dynamic Content Loading**
+**Challenge**: IPL website uses dynamic JavaScript-rendered content
+**Solution**: Implemented `waitUntil: 'networkidle2'` and specific element waiting
+
+#### 2. **Selector Reliability**
+**Challenge**: Website structure changes could break scraping
+**Solution**: Multiple selector fallbacks and robust error handling
+
+#### 3. **Rate Limiting & Performance**
+**Challenge**: Avoiding being blocked by the target website
+**Solution**: Implemented smart caching (60s duration) and request optimization
+
+#### 4. **Live Match Data Availability**
+**Challenge**: Live match selectors not consistently available on iplt20.com
+**Solution**: Hybrid approach with realistic dummy data for live matches
+
+#### 5. **Serverless Deployment Issues**
+**Challenge**: Puppeteer compatibility with Vercel serverless functions
+**Solution**: Optimized browser launch arguments and extended timeout to 30s
+
+#### 6. **Website Access Restrictions**
+**Challenge**: Target website may block automated requests or have CORS restrictions
+**Solution**: **If scraping doesn't work, try opening the app in incognito mode or use the "Load Demo Data" feature** for continued functionality with realistic sample data
+
+### Data Reliability & User Experience
+- **Automatic Fallback**: Seamless transition to dummy data when scraping fails
+- **User Notification**: Clear indicators when using demo vs live data
+- **Manual Override**: "Load Demo Data" button for immediate access to sample data
+- **Incognito Mode**: Recommended for bypassing browser-specific restrictions
+
+## 🚀 Deployment & Production
+
+### Vercel Deployment
+
+#### Quick Deploy
 ```bash
-# Install Vercel CLI (if not already installed)
+# Install Vercel CLI
 npm i -g vercel
 
-# Login to your Vercel account
-vercel login
-```
-
-#### 2. Deploy from Command Line
-```bash
-# Navigate to your project directory
-cd c:\demo\ipl-dashboard-app
-
-# Deploy to Vercel
+# Deploy the project
 vercel
 
-# Follow the prompts:
-# - Set up and deploy? [Y/n] Y
-# - Which scope? [your-username]
-# - Link to existing project? [y/N] N
-# - Project name: ipl-dashboard-app
-# - Directory: ./
-# - Override settings? [y/N] N
+# Follow the prompts for project setup
 ```
 
-#### 3. Alternative: Deploy via Vercel Dashboard
-1. Visit [vercel.com/new](https://vercel.com/new)
-2. Connect your GitHub repository
-3. Import the `ipl-dashboard-app` project
-4. Configure build settings (usually auto-detected for Next.js)
-5. Click "Deploy"
-
-#### 4. Environment Configuration
-Since the app uses Puppeteer for web scraping, add these environment variables in Vercel:
-```
+#### Environment Variables
+For production deployment, configure these environment variables in Vercel:
+```env
 PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
 PUPPETEER_EXECUTABLE_PATH=/usr/bin/google-chrome-stable
 ```
 
-#### 5. Vercel Configuration (vercel.json)
-The app may need a `vercel.json` file for Puppeteer compatibility:
+#### Vercel Configuration
+The project includes `vercel.json` for optimal performance:
 ```json
 {
   "functions": {
-    "app/api/scrape/route.ts": {
+    "src/app/api/scrape/route.ts": {
       "maxDuration": 30
     }
   }
 }
 ```
 
-#### 6. Production Considerations
-- **Puppeteer on Vercel**: May require serverless-friendly alternatives like Playwright or chrome-aws-lambda
-- **API Timeouts**: Scraping functions have 10s timeout, compatible with Vercel's limits
-- **Caching**: Built-in 60s cache reduces API calls and improves performance
-- **Fallback Data**: Comprehensive dummy data ensures app works even if scraping fails
+### Performance Optimizations
+- **Serverless Function Timeout**: Extended to 30s for reliable scraping
+- **Caching Strategy**: 60-second cache with intelligent error recovery
+- **Image Optimization**: Next.js automatic image optimization for team logos
+- **Code Splitting**: Automatic component-level code splitting
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### 🚨 Deployment Troubleshooting
 
-## IPL Data Scraping Implementation
+#### Common Issue: npm Registry Authentication Error
 
-### Current Scraping Status
-The app successfully scrapes **real IPL data** for:
-- ✅ **Points Table**: Live data from `https://www.iplt20.com/points-table/`
-- ✅ **Match Results**: Live data from `https://www.iplt20.com/matches/results` (first 20 results)
+**Problem**: Vercel deployment fails with error:
+```
+npm error code E401
+npm error Incorrect or missing password.
+npm error If you were trying to login, change your password, or update your user account, please use 'npm login'
+```
 
-### Dummy Data Used For:
-- ❌ **Live Matches & Schedule**: Could not locate reliable selectors on iplt20.com for live updates and fixture schedules
-- ❌ **Upcoming Matches**: Using sample dummy data with realistic IPL team matchups
+**Root Cause**: This typically occurs when your local npm configuration or `package-lock.json` points to a private/corporate registry (like JFrog Artifactory) that Vercel cannot authenticate with.
 
-### Technical Implementation
-- **Web Scraping**: Uses Puppeteer for headless browser automation
-- **Data Sources**: Official IPL website (iplt20.com)
-- **Caching**: 60-second cache duration with error tracking and fallback mechanisms
-- **Fallback Strategy**: If scraping fails, falls back to comprehensive dummy data
-- **Error Handling**: Robust timeout handling (10s max) with graceful degradation
+**Solution Steps**:
 
-### Scraped Data Details
-- **Points Table**: Team standings, played/won/lost stats, NRR, points, recent form
-- **Match Results**: Team codes, scores, overs, match results, venue information, match order (Final, Qualifier, etc.)
-- **Data Volume**: Up to 20 recent match results, complete points table (8+ teams)
+1. **Create `.npmrc` file** in your project root:
+```bash
+registry=https://registry.npmjs.org/
+```
 
-### Sample Dummy Data
-When scraping fails, the app provides realistic sample data including:
-- IPL playoff structure (Final, Qualifier 1/2, Eliminator matches)
-- Authentic team codes (RCB, CSK, MI, KKR, SRH, DC, RR, PBKS)
-- Realistic scores and match scenarios
-- Comprehensive points table with NRR and recent form indicators
+2. **Delete and regenerate package-lock.json**:
+```bash
+rm package-lock.json
+npm cache clean --force
+npm install
+```
 
-### Performance & Reliability
-- **Cache Duration**: 60 seconds for fresh data
-- **Scraping Timeout**: 10 seconds maximum per request
-- **Error Recovery**: Automatic fallback to dummy data on failures
-- **Headers**: Cache-busting headers ensure fresh data reaches frontend
+3. **Ensure favicon is in correct location**:
+```bash
+# Move favicon from src/app/ to public/ if needed
+mv src/app/favicon.ico public/favicon.ico
+```
+
+4. **Verify local build works**:
+```bash
+npm run build
+```
+
+5. **Commit and push changes**:
+```bash
+git add .
+git commit -m "Fix npm registry for Vercel deployment"
+git push origin main
+```
+
+**Prevention**: Always use public npm registry for projects intended for deployment on platforms like Vercel, Netlify, or Heroku.
+
+#### Other Deployment Issues
+
+**Build Timeouts**:
+- Ensure `vercel.json` has proper timeout configuration (30s for scraping functions)
+- Consider implementing build-time optimizations for large dependencies
+
+**Puppeteer Issues**:
+- Verify Puppeteer environment variables are set correctly
+- Test scraping functionality locally before deployment
+
+**Memory Issues**:
+- Monitor Vercel function memory usage
+- Consider implementing data pagination for large datasets
+
+## 🏆 IPL Teams Supported
+
+| Team Code | Full Name | Primary Color |
+|-----------|-----------|---------------|
+| CSK | Chennai Super Kings | #FDB913 |
+| MI | Mumbai Indians | #004BA0 |
+| RCB | Royal Challengers Bangalore | #EC1E24 |
+| KKR | Kolkata Knight Riders | #3A225D |
+| SRH | Sunrisers Hyderabad | #FF822A |
+| DC | Delhi Capitals | #282968 |
+| RR | Rajasthan Royals | #EA1A85 |
+| PBKS | Punjab Kings | #DD1F2D |
+
+## 🧪 Development Commands
+
+```bash
+# Run development server
+npm run dev
+
+# Build for production
+npm run build
+
+# Start production server
+npm run start
+
+# Lint code
+npm run lint
+```
+
+---
+
+**Built with ❤️ for cricket fans worldwide** 🏏

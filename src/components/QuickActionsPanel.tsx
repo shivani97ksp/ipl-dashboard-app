@@ -56,7 +56,7 @@ const QuickActionsPanel: React.FC<QuickActionsPanelProps> = ({
                     onTabChange(tab.id);
                     setIsExpanded(false);
                   }}
-                  className={`p-2 rounded-lg transition-all duration-200 text-xs ${
+                  className={`p-2 rounded-lg transition-all duration-200 text-xs cursor-pointer ${
                     currentTab === tab.id
                       ? 'bg-blue-600 text-white shadow-md'
                       : 'hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-600 dark:text-gray-400'
@@ -82,7 +82,7 @@ const QuickActionsPanel: React.FC<QuickActionsPanelProps> = ({
                     if (action.id !== 'refresh') setIsExpanded(false);
                   }}
                   disabled={action.isLoading}
-                  className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-600 dark:text-gray-400 transition-all duration-200 disabled:opacity-50 text-xs"
+                  className={`p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-600 dark:text-gray-400 transition-all duration-200 disabled:opacity-50 text-xs ${action.isLoading ? 'cursor-not-allowed' : 'cursor-pointer'}`}
                   title={action.label}
                 >
                   <div className={`text-sm ${action.isLoading ? 'animate-spin' : ''}`}>
@@ -98,7 +98,7 @@ const QuickActionsPanel: React.FC<QuickActionsPanelProps> = ({
       {/* Small Floating Action Button */}
       <button
         onClick={() => setIsExpanded(!isExpanded)}
-        className={`w-10 h-10 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center hover:scale-110 ${isExpanded ? 'rotate-45' : ''}`}
+        className={`w-10 h-10 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center hover:scale-110 cursor-pointer ${isExpanded ? 'rotate-45' : ''}`}
         aria-label="Quick Actions"
         title="Quick Actions"
       >
