@@ -7,6 +7,7 @@ import EnhancedLiveMatch from "../components/EnhancedLiveMatch";
 import EnhancedPointsTable from "../components/EnhancedPointsTable";
 import QuickActionsPanel from "../components/QuickActionsPanel";
 import { LiveMatchSkeleton, PointsTableSkeleton, ScheduleSkeleton, StatsSkeleton } from "../components/SkeletonLoaders";
+import { dummyIPLData } from "../data/dummyData";
 
 interface Match {
   id: string;
@@ -111,24 +112,7 @@ export default function Home() {
   const loadDemoData = () => {
     setError(null);
     setLoading(false);
-    setData({
-      matches: [
-        { id: '1', date: '2025-08-07', time: '19:30', teams: ['MI', 'CSK'], venue: 'Wankhede Stadium, Mumbai', status: 'upcoming' },
-        { id: '2', date: '2025-08-06', time: '19:30', teams: ['RCB', 'KKR'], venue: 'M. Chinnaswamy Stadium, Bangalore', status: 'live', score: { RCB: '156/4 (18.3)', KKR: '142/8 (20)' } }
-      ],
-      pointsTable: [
-        { team: 'CSK', played: 12, won: 9, lost: 3, nr: 0, nrr: 1.456, points: 18 },
-        { team: 'MI', played: 12, won: 8, lost: 4, nr: 0, nrr: 0.892, points: 16 },
-        { team: 'RCB', played: 12, won: 7, lost: 5, nr: 0, nrr: 0.245, points: 14 }
-      ],
-      schedule: [
-        { id: '1', date: '2025-08-07', time: '19:30', teams: ['MI', 'CSK'], venue: 'Wankhede Stadium, Mumbai', status: 'upcoming' },
-        { id: '2', date: '2025-08-08', time: '15:30', teams: ['SRH', 'DC'], venue: 'Rajiv Gandhi Intl. Stadium, Hyderabad', status: 'upcoming' }
-      ],
-      results: [
-        { id: 'result_1', date: '2025-08-03', time: '19:30', teams: ['RCB', 'PBKS'], venue: 'Stadium', status: 'completed', score: { RCB: '190/9', PBKS: '184/7' }, result: 'RCB Won by 6 Runs', matchOrder: 'Final' }
-      ]
-    });
+    setData(dummyIPLData);
   };
 
   useEffect(() => {
